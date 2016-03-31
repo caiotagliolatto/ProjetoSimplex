@@ -2,7 +2,7 @@
 
 <b>Projeto de Pesquisa Operacional</b> - 5º Semestre BSI <br>
 
-Projeto Simples desenvolvido em C# pelo visual studio. 
+Projeto Simplex desenvolvido em C# pelo visual studio. 
 
 <h1>Integrantes</h1>
 
