@@ -11,6 +11,7 @@ namespace WindowsFormsApplication1
 {
     public partial class sec : Form
     {
+        //MAX
         static int vf, vb, deci = 0, helpVar2 = 0, helpVar = 0;
         DataTable tbDataGridM = new DataTable();
         float[,] matrizSimplex = new float[0, 0];
@@ -23,6 +24,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             if (vf > 0 && vb > 0)
             {
+                //CRIAÇÃO DA GRID
                 DataTable tbDataGridM2 = new DataTable();
                 tbDataGridM2 = new DataTable();
                 tbDataGridM2.Columns.Add("Base", typeof(string));
@@ -36,6 +38,8 @@ namespace WindowsFormsApplication1
                 tbDataGridM2.Columns.Add("B", typeof(float));
 
                 object[] Linha = new object[tbDataGridM2.Columns.Count];
+
+               
 
                 for (int linha = 1; linha <= vf; linha++)
                 {
@@ -66,6 +70,7 @@ namespace WindowsFormsApplication1
                 matrizSimplex = new float[vf + 1, vf + vb + 1];
                 MatrizIlimitada = new float[vf + 1, vb + vf + 1];
 
+             
                 for (int linha = 0; linha < matrizSimplex.GetLength(0); linha++)
                 {
                     for (int coluna = 0; coluna < matrizSimplex.GetLength(1); coluna++)
@@ -107,7 +112,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Nao existe matriz", "Erro de matriz", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-
+        //VALIDAÇÃO DE OPÇÃO ENTRE MAX E MIN
     private void button1_Click_1(object sender, EventArgs e)
         {
 
@@ -138,6 +143,7 @@ namespace WindowsFormsApplication1
             int contador = 0;
             bool flag = true;
 
+            //MATRIZ RECEBE VALORES
             for (X = 0; X < Matriz.GetLength(0); X++)
             {
                 for (Y = 0; Y < Matriz.GetLength(1); Y++)
@@ -146,16 +152,19 @@ namespace WindowsFormsApplication1
                 }
             }
 
+            //CRIA MATRIZ AUXILIAR
             float[,] MatrizAux = new float[vf + 1, vb + vf + 1];
 
             for (X = 0; X < Matriz.GetLength(0); X++)
             {
+                //PASSAR VALORES DA MATRIZ PARA MATRIZ AUXILIAR
                 for (Y = 0; Y < Matriz.GetLength(1); Y++)
                 {
                     MatrizAux[X, Y] = Matriz[X, Y];
                 }
             }
 
+            //VERIFICAR SE HÁ VALORES POSITIVOS NA LINHA Z
             for (Y = 0; Y < Matriz.GetLength(1); Y++)
             {
                 if (Matriz[(Matriz.GetLength(0) - 1), Y] < 0) { contador = 1; }
@@ -281,7 +290,7 @@ namespace WindowsFormsApplication1
         {
 
         }
-        //COMEÇO MINIMIZAÇÃO
+        //COMEÇO DA MINIMIZAÇÃO
         public float[,] itMin(float[,] Matriz)
         {
             int xPivo = 0, yPivo = 0, x = 0, y = 0;
