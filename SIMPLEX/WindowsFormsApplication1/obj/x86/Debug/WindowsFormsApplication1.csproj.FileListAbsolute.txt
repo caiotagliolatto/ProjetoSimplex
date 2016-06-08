@@ -49,3 +49,5 @@ C:\Users\Reds\Desktop\SIMPLEX\WindowsFormsApplication1\obj\x86\Debug\WindowsForm
 C:\Users\Reds\Desktop\SIMPLEX\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.main.resources
 C:\Users\Reds\Desktop\SIMPLEX\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\Reds\Desktop\SIMPLEX\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Reds\Source\Repos\ProjetoSimplex\SIMPLEX\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+C:\Users\Reds\Source\Repos\ProjetoSimplex\SIMPLEX\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
