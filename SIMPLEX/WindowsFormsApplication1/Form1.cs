@@ -49,7 +49,7 @@ namespace WindowsFormsApplication1
             else { MessageBox.Show("Selecione um tipo!", "Erro"); }
 
 
-            if (maxbut.Checked)
+            if (maxbut.Checked || minbut.Checked)
             {
 
                 if (textBox1.Text != "" && textBox2.Text != "")

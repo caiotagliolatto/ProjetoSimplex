@@ -118,7 +118,7 @@ namespace WindowsFormsApplication1
             else if (deci==2)
             {
 
-               // itMin(matrizSimplex);
+               itMin(matrizSimplex);
             }
             else
             {
@@ -280,6 +280,166 @@ namespace WindowsFormsApplication1
     private void main_Load(object sender, EventArgs e)
         {
 
+        }
+        //COMEÇO MINIMIZAÇÃO
+        public float[,] itMin(float[,] Matriz)
+        {
+            int xPivo = 0, yPivo = 0, x = 0, y = 0;
+            float Pivo = 0, MaiorZ = 0, Aux = 0, PrimeiraDiv = 0;
+            int contador = 0;
+            bool flag = true;
+
+            //MATRIZ RECEBE VALORES
+            for (x = 0; x < Matriz.GetLength(0); x++)
+            {
+                for (y = 0; y < Matriz.GetLength(1); y++)
+                {
+                    Matriz[x, y] = float.Parse(tbDataGridM.Rows[x][y + 1].ToString());
+                }
+            }
+
+
+            //CRIA MATRIZ AUXILIAR
+            float[,] MatrizAux = new float[vf + 1, vb + vf + 1];
+
+
+            //PASSAR VALORES DA MATRIZ PARA MATRIZ AUXILIAR
+            for (x = 0; x < Matriz.GetLength(0); x++)
+            {
+                for (y = 0; y < Matriz.GetLength(1); y++)
+                {
+                    MatrizAux[x, y] = Matriz[x, y];
+                }
+            }
+
+
+            //VERIFICAR SE HÁ VALORES POSITIVOS NA LINHA Z
+            for (y = 0; y < Matriz.GetLength(1); y++)
+            {
+                if (Matriz[(Matriz.GetLength(0) - 1), y] > 0) { contador = 1; }
+            }
+            
+
+            if (contador != 1)
+                MessageBox.Show("Não há iterações a serem feitas!", "Erro");
+
+
+            if (contador == 1)
+            {
+
+                //TESTE MAIOR VALOR DE Z
+                for (x = (Matriz.GetLength(0) - 1); x < Matriz.GetLength(0); x++)
+                {
+                    for (y = 0; y < Matriz.GetLength(1) - 1; y++)
+                    {
+                        if ((Matriz[x, y] > 0) && (Matriz[x, y] > MaiorZ))
+                        {
+                            MaiorZ = Matriz[x, y]; yPivo = y;
+                        }
+                    }
+                }
+
+
+                //ENCONTRAR MENOR VALOR DE B
+                PrimeiraDiv = Matriz[0, (Matriz.GetLength(1) - 1)] / Matriz[0, yPivo];
+                for (x = 0; x < (Matriz.GetLength(0) - 1); x++)
+                {
+                    for (y = Matriz.GetLength(1) - 1; y < Matriz.GetLength(1); y++)
+                    {
+                        if (Matriz[x, y] / Matriz[x, yPivo] < PrimeiraDiv && Matriz[x, y] / Matriz[x, yPivo] > 0)
+                        {
+                            Aux = Matriz[x, y]; xPivo = x;
+                        }
+                    }
+                }
+
+
+                //PIVO~~
+                Pivo = Matriz[xPivo, yPivo];
+
+
+                //DIVIDIR LINHA PELO PIVO
+                for (x = xPivo; x <= xPivo; x++)
+                {
+                    for (y = 0; y < Matriz.GetLength(1); y++)
+                    {
+                        Matriz[x, y] /= Pivo; MatrizAux[x, y] = Matriz[x, y];
+                    }
+                }
+
+
+                //ZERAR COLUNA DO PIVO
+                for (x = 0; x < Matriz.GetLength(0); x++)
+                {
+                    for (y = 0; y < Matriz.GetLength(1); y++)
+                    {
+                        if (x != xPivo)
+                        {
+                            MatrizAux[x, y] = Matriz[xPivo, y] * (-1 * Matriz[x, yPivo]) + Matriz[x, y];
+                        }
+                    }
+                }
+
+
+                //PASSAR VALORES DA MATRIZ AUX PARA MATRIZ
+                for (x = 0; x < Matriz.GetLength(0); x++)
+                {
+                    for (y = 0; y < Matriz.GetLength(1); y++)
+                    {
+                        Matriz[x, y] = MatrizAux[x, y];
+                    }
+                }
+
+
+                //TABELA RECEBE VALORES DA MATRIZ
+                for (x = 0; x < Matriz.GetLength(0); x++)
+                {
+                    for (y = 0; y < Matriz.GetLength(1); y++)
+                    {
+                        tbDataGridM.Rows[x][y + 1] = (Matriz[x, y].ToString());
+                    }
+                }
+
+
+                //COLUNA ENTRA, LINHA SAI
+                tbDataGridM.Rows[xPivo][0] = (tbDataGridM.Columns[yPivo + 1].ColumnName.ToString());
+
+
+                //VERIFICAR SE MATRIZ EH ILIMITADA
+                for (x = 0; x < Matriz.GetLength(0); x++)
+                {
+                    if (flag != true)
+                    {
+                        break;
+                    }
+
+                    for (y = 0; y < Matriz.GetLength(1); y++)
+                    {
+                        if (MatrizIlimitada[x, y] != Matriz[x, y])
+                        {
+                            flag = false;
+                            break;
+                        }
+                        else { helpVar2 = 2; }
+                    }
+                }
+
+
+                //PRIMEIRA INTERAÇÃO DE MATRIZ
+                if (helpVar == 0)
+                {
+                    for (x = 0; x < Matriz.GetLength(0); x++)
+                    {
+                        for (y = 0; y < Matriz.GetLength(1); y++)
+                        {
+                            MatrizIlimitada[x, y] = Matriz[x, y];
+                        }
+                    }
+                    helpVar = 1;
+                }
+                //FIM
+            }
+            return (Matriz);
         }
     }
 }
